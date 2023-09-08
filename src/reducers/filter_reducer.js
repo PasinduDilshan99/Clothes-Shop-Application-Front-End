@@ -2,10 +2,12 @@ import {
   LOAD_PRODUCTS,
   SET_LISTVIEW,
   SET_GRIDVIEW,
+  UPDATE_CLOTHES,
   UPDATE_SORT,
   SORT_PRODUCTS,
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
+  UPDATE_MALE_FEMALE,
   CLEAR_FILTERS,
 } from "../actions";
 
@@ -23,6 +25,17 @@ const filter_reducer = (state, action) => {
 
   if (action.type === SET_GRIDVIEW) {
     return { ...state, grid_view: true };
+  }
+
+  if (action.type === UPDATE_MALE_FEMALE) {
+    const { maleFemale } = state;
+    // console.log(maleFemale);
+    let male_female = !maleFemale;
+    // console.log(male_female);
+    return {
+      ...state,
+      maleFemale: !maleFemale,
+    };
   }
   if (action.type === SET_LISTVIEW) {
     return { ...state, grid_view: false };
@@ -67,9 +80,28 @@ const filter_reducer = (state, action) => {
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
 
+  if (action.type === UPDATE_CLOTHES) {
+    const { name, e1 } = action.payload;
+    console.log(e1);
+    console.log(name);
+
+    let { maleUp, maleDown } = state;
+
+    // maleUp
+    if (name === "maleUp") {
+      maleUp = e1;
+    }
+    if (name === "maleDown") {
+      maleDown = e1;
+    }
+    console.log(e1);
+
+    return { ...state, maleUp, maleDown };
+  }
+
   if (action.type === FILTER_PRODUCTS) {
     const { all_products } = state;
-    const { text, gen, category, company, color, price, shipping } =
+    const { text, gen, category, company, color, price, shipping, maleFemale } =
       state.filters;
     let tempProducts = [...all_products];
     // text
@@ -115,7 +147,10 @@ const filter_reducer = (state, action) => {
       );
     }
 
-    return { ...state, filtered_products: tempProducts };
+    return {
+      ...state,
+      filtered_products: tempProducts,
+    };
   }
 
   if (action.type === CLEAR_FILTERS) {
@@ -129,6 +164,7 @@ const filter_reducer = (state, action) => {
         color: "all",
         price: state.filters.max_price,
         shipping: false,
+        maleFemale: false,
       },
     };
   }

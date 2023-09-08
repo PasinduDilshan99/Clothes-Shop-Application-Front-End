@@ -3,12 +3,25 @@ import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useFilterContext } from "../context/filter_context";
+import ShowClothes from "../components/ShowClothes";
 
 const Product = ({ image, name, price, id }) => {
+  const { maleFemale, maleUp, maleDown, femaleUp, femaleDown, updateClothes } =
+    useFilterContext();
+  // console.log(maleFemale);
   // console.log(name);
   // console.log(image);
   // console.log(price);
   // console.log(id);
+  // console.log(maleDown);
+  // console.log("maleDown");
+  // console.log(maleUp);
+
+  const clothe = (id) => {
+    // console.log(id);
+    updateClothes(id);
+  };
   return (
     <Wrapper>
       <div className="container">
@@ -19,6 +32,9 @@ const Product = ({ image, name, price, id }) => {
       </div>
       <footer>
         <h5>{name}</h5>
+        <button className="btn1" onClick={() => clothe(id)}>
+          {maleFemale === true && `${id}`}
+        </button>
         <p>{formatPrice(price)}</p>
       </footer>
     </Wrapper>
@@ -26,6 +42,8 @@ const Product = ({ image, name, price, id }) => {
 };
 
 const Wrapper = styled.article`
+  .btn1 {
+  }
   .container {
     position: relative;
     background: var(--clr-black);

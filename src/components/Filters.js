@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
+import dummy1 from "../assets/dummy.png";
+import dummy2 from "../assets/dummy2.jpeg";
+import tshirt from "../assets/1.png";
+import trowser from "../assets/2.png";
 
 const Filters = () => {
   const {
@@ -17,11 +21,13 @@ const Filters = () => {
       price,
       shipping,
     },
+    maleFemale,
+    updateMaleFemale,
     updateFilters,
     clearFilters,
     all_products,
   } = useFilterContext();
-
+  // console.log(maleFemale);
   const gens = getUniqueValues(all_products, "gen");
   //const categories = getUniqueValues(filtered_products, "category");
   //const categories = getUniqueValues(all_products, "category");
@@ -34,6 +40,18 @@ const Filters = () => {
   a1 = all_products.filter((item) => item.gen === gen);
   // console.log(a1);
 
+  // const [valueCheck, setValueCheck] = useState(false);
+
+  // const maleFemaleHandle = () => {
+  //   setValueCheck(!valueCheck);
+  // };
+  let gender = "";
+  if (gen.toLowerCase() === "male") {
+    gender = "male";
+  }
+  if (gen.toLowerCase() === "female") {
+    gender = "female";
+  }
   // let newCat = [];
   // newCat = all_products.map((c) => c);
   // console.log(newCat);
@@ -47,6 +65,23 @@ const Filters = () => {
   const categories = getUniqueValues(a1, "category");
   return (
     <Wrapper>
+      {maleFemale === true && (
+        <div>
+          <img
+            src={
+              (gender === "male" && dummy1) ||
+              (gender === "female" && dummy2) ||
+              (gender === "" && "")
+            }
+            className={
+              (gender === "male" && "male1") ||
+              (gender === "female" && "female1")
+            }
+          />
+          {/* <img src={tshirt} className="parent image1" />
+        <img src={trowser} className="parent image2" /> */}
+        </div>
+      )}
       <div className="content">
         <form onSubmit={(e) => e.preventDefault()}>
           {/* search input */}
@@ -184,12 +219,58 @@ const Filters = () => {
         <button type="button" className="clear-btn" onClick={clearFilters}>
           clear filters
         </button>
+
+        {gender != "" && (
+          <div className="form-control shipping">
+            <label>Fit</label>
+            <br />
+            <label htmlFor="shipping">
+              {(gender === "male" && "male") ||
+                (gender === "female" && "female")}
+            </label>
+            <input
+              type="checkbox"
+              name="maleFemale"
+              id="maleFemale"
+              onChange={updateMaleFemale}
+              checked={maleFemale}
+            ></input>
+          </div>
+        )}
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
+
+.male1{
+position: absolute;
+    top: 380px;
+    left: 10px;
+}
+.female1{
+position: absolute;
+    top: 380px;
+     height: 80%;
+    left: 10px;
+}
+
+ 
+  .image1 {
+      position: absolute;
+      top: 700px;
+      height: 42%;
+      left: 31px;
+      z-index: 1;
+  }
+  .image2 {    
+      position: absolute;
+       height: 28%;
+      top: 485px;
+      left: 15px;
+      z-index: 2;
+      }
   .form-control {
     margin-bottom: 1.25rem;
     h5 {

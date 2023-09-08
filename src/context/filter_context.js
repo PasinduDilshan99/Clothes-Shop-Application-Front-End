@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useReducer } from "react";
 import reducer from "../reducers/filter_reducer";
 import {
   LOAD_PRODUCTS,
+  UPDATE_CLOTHES,
   SET_GRIDVIEW,
   SET_LISTVIEW,
   UPDATE_SORT,
@@ -9,6 +10,7 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
+  UPDATE_MALE_FEMALE,
 } from "../actions";
 import { useProductsContext } from "./products_context";
 
@@ -16,6 +18,11 @@ const initialState = {
   filtered_products: [],
   all_products: [],
   grid_view: true,
+  maleUp: 0,
+  maleDown: 0,
+  femaleUp: 0,
+  femaleDown: 0,
+  maleFemale: false,
   sort: "price-lowest",
   filters: {
     text: "",
@@ -62,6 +69,33 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
+  const updateMaleFemale = (e) => {
+    let value = e.target.checked;
+
+    dispatch({ type: UPDATE_MALE_FEMALE, payload: value });
+  };
+
+  const updateClothes = (e1) => {
+    let name = "";
+    let a = 0;
+    a = e1 % 4;
+    // console.log(a);
+    // console.log(name1);
+    if (a === 0) {
+      name = "maleUp";
+    }
+    if (a === 1) {
+      name = "maleDown";
+    }
+    // if (name1 === "femaleUp") {
+    //   value1 = e.target.textContent;
+    // }
+    // if (name1 === "femaleDown") {
+    //   value1 = e.target.textContent;
+    // }
+    dispatch({ type: UPDATE_CLOTHES, payload: { name, e1 } });
+  };
+
   const updateFilters = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -97,6 +131,8 @@ export const FilterProvider = ({ children }) => {
         updateSort,
         updateFilters,
         clearFilters,
+        updateMaleFemale,
+        updateClothes,
       }}
     >
       {children}

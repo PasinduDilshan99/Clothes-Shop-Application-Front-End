@@ -23,7 +23,11 @@ import t10 from "../assets/10.png";
 import { useFilterContext } from "../context/filter_context";
 
 const ShowClothes = () => {
-  const { maleUp, maleDown } = useFilterContext();
+  let {
+    filters: { gen },
+    maleUp,
+    maleDown,
+  } = useFilterContext();
 
   let img1 = "";
   let img2 = "";
@@ -32,7 +36,10 @@ const ShowClothes = () => {
   //   img1 = `ts${maleUp}`;
   //   console.log("aa");
   // }
-
+  if (gen !== "male") {
+    maleDown = 0;
+    maleUp = 0;
+  }
   if (maleUp === 4) {
     img1 = ts1;
   }

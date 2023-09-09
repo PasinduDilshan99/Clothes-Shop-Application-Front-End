@@ -8,11 +8,15 @@ const Services = () => {
       <div className="section-center">
         <article className="header">
           <h3>
-            custom furn
+            Those are
             <br />
-            buit ion
+            our mission, vision and history
           </h3>
-          <p> asdfsafsaf as sf asf asf as asf sa f3r rtrh et e dg er </p>
+          <p>
+            {" "}
+            A shop that sells clothes for a narrowly restricted market such as
+            school uniforms or outdoor sports may be called an outfitter.{" "}
+          </p>
         </article>
         <div className="services-center">
           {services.map((service) => {

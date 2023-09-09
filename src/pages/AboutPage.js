@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PageHero } from "../components";
-import aboutImg from "../assets/hero-bcg.jpeg";
+import aboutImg from "../assets/hero-bcg-3.jpeg";
 
 const AboutPage = () => {
   return (
@@ -11,11 +11,16 @@ const AboutPage = () => {
         <img src={aboutImg} alt="nice desk" />
         <article>
           <div className="title">
-            <h2>Oue Story</h2>
+            <h2>Our Story</h2>
           </div>
           <p>
-            sdfaf as asfhjasfas asdfjasuif asuihasbf asuf sabbasf asf ab fasuf
-            asuif auuia ui
+            It is not known when the first clothes shops were opened in Europe.
+            Before the era of ready-made clothes, when clothing was made by
+            tailors or artisans, shops may have sold second-hand clothing. Some
+            ready-made clothes may have been made in the sixteenth century. The
+            number of clothes shops appears to have risen steadily long before
+            the beginning of large-scale industrial manufacture of clothing in
+            the second half of the nineteenth century.
           </p>
         </article>
       </Wrapper>

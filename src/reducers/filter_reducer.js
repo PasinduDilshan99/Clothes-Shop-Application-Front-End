@@ -28,13 +28,19 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type === UPDATE_MALE_FEMALE) {
-    const { maleFemale } = state;
+    let { maleFemale, maleUp, maleDown } = state;
     // console.log(maleFemale);
     let male_female = !maleFemale;
     // console.log(male_female);
+    if (male_female === false) {
+      maleUp = 0;
+      maleDown = 0;
+    }
     return {
       ...state,
       maleFemale: !maleFemale,
+      maleDown,
+      maleUp,
     };
   }
   if (action.type === SET_LISTVIEW) {
@@ -158,6 +164,8 @@ const filter_reducer = (state, action) => {
       ...state,
       filters: {
         ...state.filters,
+        maleUp: 0,
+        maleDown: 0,
         text: "",
         company: "all",
         category: "all",

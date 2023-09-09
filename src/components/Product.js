@@ -33,8 +33,10 @@ const Product = ({ image, name, price, id }) => {
       <footer>
         <h5>{name}</h5>
         <button className="btn1" onClick={() => clothe(id)}>
-          {maleFemale === true && `${id}`}
+          {maleFemale === true && "Fit"}
         </button>
+
+        <br />
         <p>{formatPrice(price)}</p>
       </footer>
     </Wrapper>

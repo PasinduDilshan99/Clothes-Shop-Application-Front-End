@@ -82,8 +82,8 @@ const filter_reducer = (state, action) => {
 
   if (action.type === UPDATE_CLOTHES) {
     const { name, e1 } = action.payload;
-    console.log(e1);
-    console.log(name);
+    // console.log(e1);
+    // console.log(name);
 
     let { maleUp, maleDown } = state;
 
@@ -94,7 +94,7 @@ const filter_reducer = (state, action) => {
     if (name === "maleDown") {
       maleDown = e1;
     }
-    console.log(e1);
+    // console.log(e1);
 
     return { ...state, maleUp, maleDown };
   }

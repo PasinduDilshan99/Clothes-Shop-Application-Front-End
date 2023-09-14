@@ -1,1 +1,1 @@
-link : https://cobra-final-clothes.netlify.app/
+link : https://cobra-final-clothes.netlify.app
